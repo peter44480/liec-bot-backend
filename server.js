@@ -34,3 +34,6 @@ app.post('/chat', async (req, res) => {
     res.status(500).json({ error: 'Error communicating with AI' });
   }
 });
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
