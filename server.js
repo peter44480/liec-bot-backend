@@ -1,4 +1,3 @@
-
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
@@ -34,6 +33,8 @@ app.post('/chat', async (req, res) => {
     res.status(500).json({ error: 'Error communicating with AI' });
   }
 });
-
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+app.get('/', (req, res) => {
+  res.send('✅ LIEC Bot Backend is Running');
+});
