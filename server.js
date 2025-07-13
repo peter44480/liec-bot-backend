@@ -10,6 +10,7 @@ app.use(express.json());
 
 app.post('/chat', async (req, res) => {
   const userMessage = req.body.message;
+  console.log("Received user message:", userMessage); // 👈 Log incoming message
 
   try {
     const response = await axios.post('https://api.openai.com/v1/chat/completions', {
@@ -25,11 +26,11 @@ app.post('/chat', async (req, res) => {
       }
     });
 
+    console.log("OpenAI response received"); // 👈 Log successful API call
     res.json({ reply: response.data.choices[0].message.content });
+
   } catch (error) {
+    console.error("OpenAI API error:", error.response?.data || error.message); // 👈 Log the error
     res.status(500).json({ error: 'Error communicating with AI' });
   }
 });
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
